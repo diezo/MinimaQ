@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinimaQ - AI Quiz Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <audio style="display: none;" id="correct-sound" src="static/correct.mp3" preload="auto"></audio>
+    <audio style="display: none;" id="wrong-sound" src="static/wrong.mp3" preload="auto"></audio>
+
+    <span style="display: none;" id="correct-option"></span>
+    <span style="display: none;" id="data">{{ENCODED_DATA}}</span>
+    <!-- <span style="display: none;" id="data">ewogICAgInF1ZXN0aW9ucyI6IFsKICAgICAgICB7CiAgICAgICAgICAgICJxdWVzdGlvbiI6ICJXaGljaCBwaWVjZSBtb3ZlcyBpbiBhbiBMLXNoYXBlPyIsCiAgICAgICAgICAgICJvcHRpb25zIjogWwogICAgICAgICAgICAgICAgIlBhd24iLAogICAgICAgICAgICAgICAgIlJvb2siLAogICAgICAgICAgICAgICAgIktuaWdodCIsCiAgICAgICAgICAgICAgICAiQmlzaG9wIgogICAgICAgICAgICBdLAogICAgICAgICAgICAiY29ycmVjdCI6IDIsCiAgICAgICAgICAgICJleHBsYWluYXRpb24iOiAiVGhlIEtuaWdodCBtb3ZlcyBpbiBhbiBMLXNoYXBlOiB0d28gc3F1YXJlcyBpbiBvbmUgZGlyZWN0aW9uLCB0aGVuIG9uZSBwZXJwZW5kaWN1bGFyLiIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInF1ZXN0aW9uIjogIldoaWNoIHBpZWNlIHN0YXJ0cyBvbiB0aGUgY29ybmVycz8iLAogICAgICAgICAgICAib3B0aW9ucyI6IFsKICAgICAgICAgICAgICAgICJSb29rIiwKICAgICAgICAgICAgICAgICJRdWVlbiIsCiAgICAgICAgICAgICAgICAiQmlzaG9wIiwKICAgICAgICAgICAgICAgICJLaW5nIgogICAgICAgICAgICBdLAogICAgICAgICAgICAiY29ycmVjdCI6IDAsCiAgICAgICAgICAgICJleHBsYWluYXRpb24iOiAiUm9va3Mgc3RhcnQgaW4gdGhlIGNvcm5lcnMgb2YgdGhlIGNoZXNzYm9hcmQgYW5kIG1vdmUgaG9yaXpvbnRhbGx5IG9yIHZlcnRpY2FsbHkuIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAicXVlc3Rpb24iOiAiV2hpY2ggcGllY2UgbW92ZXMgZGlhZ29uYWxseT8iLAogICAgICAgICAgICAib3B0aW9ucyI6IFsKICAgICAgICAgICAgICAgICJQYXduIiwKICAgICAgICAgICAgICAgICJSb29rIiwKICAgICAgICAgICAgICAgICJCaXNob3AiLAogICAgICAgICAgICAgICAgIktuaWdodCIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAyLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIkJpc2hvcHMgbW92ZSBkaWFnb25hbGx5IGFjcm9zcyB0aGUgYm9hcmQsIHdpdGggbm8gbGltaXQgb24gZGlzdGFuY2UgcGVyIG1vdmUuIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAicXVlc3Rpb24iOiAiSG93IG1hbnkgc3F1YXJlcyBkb2VzIGEgS2luZyBtb3ZlPyIsCiAgICAgICAgICAgICJvcHRpb25zIjogWwogICAgICAgICAgICAgICAgIk9uZSIsCiAgICAgICAgICAgICAgICAiVHdvIiwKICAgICAgICAgICAgICAgICJUaHJlZSIsCiAgICAgICAgICAgICAgICAiRm91ciIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAwLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIlRoZSBLaW5nIG1vdmVzIG9uZSBzcXVhcmUgaW4gYW55IGRpcmVjdGlvbjogZm9yd2FyZCwgYmFja3dhcmQsIHNpZGV3YXlzLCBvciBkaWFnb25hbGx5LiIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInF1ZXN0aW9uIjogIldoaWNoIHBpZWNlIGNhbiBqdW1wIG92ZXIgb3RoZXJzPyIsCiAgICAgICAgICAgICJvcHRpb25zIjogWwogICAgICAgICAgICAgICAgIlJvb2siLAogICAgICAgICAgICAgICAgIlF1ZWVuIiwKICAgICAgICAgICAgICAgICJCaXNob3AiLAogICAgICAgICAgICAgICAgIktuaWdodCIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAzLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIlRoZSBLbmlnaHQgaXMgdGhlIG9ubHkgcGllY2UgdGhhdCBjYW4ganVtcCBvdmVyIG90aGVyIHBpZWNlcyBvbiB0aGUgYm9hcmQuIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAicXVlc3Rpb24iOiAiV2hpY2ggaXMgdGhlIG1vc3QgcG93ZXJmdWwgcGllY2U/IiwKICAgICAgICAgICAgIm9wdGlvbnMiOiBbCiAgICAgICAgICAgICAgICAiS2luZyIsCiAgICAgICAgICAgICAgICAiUXVlZW4iLAogICAgICAgICAgICAgICAgIlJvb2siLAogICAgICAgICAgICAgICAgIkJpc2hvcCIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAxLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIlRoZSBRdWVlbiBpcyB0aGUgbW9zdCBwb3dlcmZ1bCBwaWVjZSwgbW92aW5nIHZlcnRpY2FsbHksIGhvcml6b250YWxseSwgYW5kIGRpYWdvbmFsbHkuIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAicXVlc3Rpb24iOiAiV2hpY2ggcGllY2Ugb25seSBtb3ZlcyBmb3J3YXJkPyIsCiAgICAgICAgICAgICJvcHRpb25zIjogWwogICAgICAgICAgICAgICAgIkJpc2hvcCIsCiAgICAgICAgICAgICAgICAiS25pZ2h0IiwKICAgICAgICAgICAgICAgICJQYXduIiwKICAgICAgICAgICAgICAgICJRdWVlbiIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAyLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIlBhd25zIG1vdmUgZm9yd2FyZCBvbmUgc3F1YXJlIGJ1dCBjYXB0dXJlIGRpYWdvbmFsbHksIGFuZCBjYW4gbW92ZSB0d28gc3F1YXJlcyBvbiBmaXJzdCBtb3ZlLiIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInF1ZXN0aW9uIjogIldoYXQgaXMgaXQgY2FsbGVkIHdoZW4gdGhlIEtpbmcgY2Fubm90IGVzY2FwZT8iLAogICAgICAgICAgICAib3B0aW9ucyI6IFsKICAgICAgICAgICAgICAgICJDaGVjayIsCiAgICAgICAgICAgICAgICAiQ2hlY2ttYXRlIiwKICAgICAgICAgICAgICAgICJTdGFsZW1hdGUiLAogICAgICAgICAgICAgICAgIkNhc3RsZSIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAxLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIkNoZWNrbWF0ZSBvY2N1cnMgd2hlbiB0aGUgS2luZyBpcyBpbiBjaGVjayBhbmQgY2Fubm90IGVzY2FwZSBvciBibG9jayB0aGUgdGhyZWF0LiIKICAgICAgICB9LAogICAgICAgIHsKICAgICAgICAgICAgInF1ZXN0aW9uIjogIldoYXQgaXMgY2FzdGxpbmc/IiwKICAgICAgICAgICAgIm9wdGlvbnMiOiBbCiAgICAgICAgICAgICAgICAiS2luZyBtb3ZlcyIsCiAgICAgICAgICAgICAgICAiS2luZyBhbmQgUm9vayBzd2FwIiwKICAgICAgICAgICAgICAgICJSb29rIG1vdmVzIiwKICAgICAgICAgICAgICAgICJLaW5nIGNhcHR1cmVkIgogICAgICAgICAgICBdLAogICAgICAgICAgICAiY29ycmVjdCI6IDEsCiAgICAgICAgICAgICJleHBsYWluYXRpb24iOiAiQ2FzdGxpbmcgaXMgYSBzcGVjaWFsIG1vdmUgaW52b2x2aW5nIHRoZSBLaW5nIGFuZCBSb29rLCBlbmhhbmNpbmcgdGhlIEtpbmcncyBzYWZldHkuIgogICAgICAgIH0sCiAgICAgICAgewogICAgICAgICAgICAicXVlc3Rpb24iOiAiSG93IG1hbnkgcGF3bnMgZG9lcyBlYWNoIHBsYXllciBzdGFydCB3aXRoPyIsCiAgICAgICAgICAgICJvcHRpb25zIjogWwogICAgICAgICAgICAgICAgIjYiLAogICAgICAgICAgICAgICAgIjgiLAogICAgICAgICAgICAgICAgIjEwIiwKICAgICAgICAgICAgICAgICIxMiIKICAgICAgICAgICAgXSwKICAgICAgICAgICAgImNvcnJlY3QiOiAxLAogICAgICAgICAgICAiZXhwbGFpbmF0aW9uIjogIkVhY2ggcGxheWVyIHN0YXJ0cyB3aXRoIDggcGF3bnMsIHdoaWNoIGFyZSBwb3NpdGlvbmVkIGluIHRoZSBzZWNvbmQgcm93LiIKICAgICAgICB9CiAgICBdCn0=</span> -->
+
+    <div id="left-section">
+        <span class="heading">Minima-Q</span>
+        <span class="sub-heading">You ask, our AI access.</span>
+
+        <span class="chosen-topic-heading">ASSSESSMENT TOPIC</span>
+        <span class="chosen-topic">{{TOPIC}}</span>
+
+        <span class="chosen-topic-heading" style="margin-top: 25px;">DIFFICULTY</span>
+        <span class="chosen-topic">{{DIFFICULTY}}</span>
+
+        <img style="display: none;" class="gif" id="correct-gif" src="/static/correct.gif" alt="GIF">
+        <img style="display: none;" class="gif" id="wrong-gif" src="/static/wrong.gif" alt="GIF">
+    </div>
+    <div id="right-section">
+        <div id="progress-bar">
+            <div id="progress"></div>
+        </div>
+
+        <span id="problem-number">PROBLEM <span class="value">0</span></span>
+        <span id="question">Question</span>
+
+        <ul id="options">
+            <li onclick="check(0)" class="option"><span class="option-index">A</span> <span class="option-text">Option 1</span></li>
+            <li onclick="check(1)" class="option"><span class="option-index">B</span> <span class="option-text">Option 2</span></li>
+            <li onclick="check(2)" class="option"><span class="option-index">C</span> <span class="option-text">Option 3</span></li>
+            <li onclick="check(3)" class="option"><span class="option-index">D</span> <span class="option-text">Option 4</span></li>
+        </ul>
+
+        <div id="action-bar">
+            <button class="action-button" onclick="window.location = '/';"><i class="fa fa-home"></i></button>
+            <button class="action-button" onclick="location.reload();" style="margin-left: 5px;"><i class="fa fa-refresh"></i></button>
+
+            <div class="space"></div>
+
+            <button id="submit-button" onclick="nextQuestion()">NEXT</button>
+        </div>
+
+        <div id="explaination" style="display: none;">
+            <span id="explaination-heading">EXPLAINATION</span>
+            <span id="explaination-text">Sample</span>
+        </div>
+
+        <div id="scorecard" style="display: none;">
+            <canvas id="blurry-background"></canvas>
+
+            <div id="scorecard-content">
+                <span class="greeting" id="positive-greeting" style="display: none;">NAILED IT! 🥳</span>                
+                <span class="greeting" id="negative-greeting" style="display: none;">IT'S OKAY! 😊</span>                
+                
+                <span id="score">0/0</span>
+
+                <button class="scorecard-button" style="margin-right: 10px;" onclick="window.location = '/';">HOME</button>
+                <button class="scorecard-button" onclick="location.reload()">REPEAT QUIZ</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

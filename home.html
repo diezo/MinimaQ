@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinimaQ - Fun & Learn AI Quizzes</title>
+    <link rel="stylesheet" href="static/home.css">
+    <script src="/static/home.js" defer></script>
+</head>
+<body>
+    <span id="initiative-text">With ❤️ By <b style="color: white;">NexCoders</b></span>
+
+    <div id="main">
+        <span class="heading">Minima-Q</span>
+        <span class="description">AI-Powered Quiz Generator</span>
+
+        <input type="text" id="topic-input" class="textbox" placeholder="Topic">
+        
+        <select class="selectbox" id="difficulty-input">
+            <option value="easy" selected>Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+            <option value="god level">God Level</option>
+        </select>
+
+        <select class="selectbox" id="questions-count-input">
+            <option value="1">1 question</option>
+            <option value="3">3 questions</option>
+            <option value="5" selected>5 questions</option>
+            <option value="10">10 questions</option>
+        </select>
+        
+        <button id="generate-button" onclick="generate()">GENERATE</button>
+    </div>
+</body>
+</html>

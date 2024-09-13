@@ -1,0 +1,114 @@
+{
+    "questions": [
+        {
+            "question": "Which piece moves in an L-shape?",
+            "options": [
+                "Pawn",
+                "Rook",
+                "Knight",
+                "Bishop"
+            ],
+            "correct": 2,
+            "explaination": "The Knight moves in an L-shape: two squares in one direction, then one perpendicular."
+        },
+        {
+            "question": "Which piece starts on the corners?",
+            "options": [
+                "Rook",
+                "Queen",
+                "Bishop",
+                "King"
+            ],
+            "correct": 0,
+            "explaination": "Rooks start in the corners of the chessboard and move horizontally or vertically."
+        },
+        {
+            "question": "Which piece moves diagonally?",
+            "options": [
+                "Pawn",
+                "Rook",
+                "Bishop",
+                "Knight"
+            ],
+            "correct": 2,
+            "explaination": "Bishops move diagonally across the board, with no limit on distance per move."
+        },
+        {
+            "question": "How many squares does a King move?",
+            "options": [
+                "One",
+                "Two",
+                "Three",
+                "Four"
+            ],
+            "correct": 0,
+            "explaination": "The King moves one square in any direction: forward, backward, sideways, or diagonally."
+        },
+        {
+            "question": "Which piece can jump over others?",
+            "options": [
+                "Rook",
+                "Queen",
+                "Bishop",
+                "Knight"
+            ],
+            "correct": 3,
+            "explaination": "The Knight is the only piece that can jump over other pieces on the board."
+        },
+        {
+            "question": "Which is the most powerful piece?",
+            "options": [
+                "King",
+                "Queen",
+                "Rook",
+                "Bishop"
+            ],
+            "correct": 1,
+            "explaination": "The Queen is the most powerful piece, moving vertically, horizontally, and diagonally."
+        },
+        {
+            "question": "Which piece only moves forward?",
+            "options": [
+                "Bishop",
+                "Knight",
+                "Pawn",
+                "Queen"
+            ],
+            "correct": 2,
+            "explaination": "Pawns move forward one square but capture diagonally, and can move two squares on first move."
+        },
+        {
+            "question": "What is it called when the King cannot escape?",
+            "options": [
+                "Check",
+                "Checkmate",
+                "Stalemate",
+                "Castle"
+            ],
+            "correct": 1,
+            "explaination": "Checkmate occurs when the King is in check and cannot escape or block the threat."
+        },
+        {
+            "question": "What is castling?",
+            "options": [
+                "King moves",
+                "King and Rook swap",
+                "Rook moves",
+                "King captured"
+            ],
+            "correct": 1,
+            "explaination": "Castling is a special move involving the King and Rook, enhancing the King's safety."
+        },
+        {
+            "question": "How many pawns does each player start with?",
+            "options": [
+                "6",
+                "8",
+                "10",
+                "12"
+            ],
+            "correct": 1,
+            "explaination": "Each player starts with 8 pawns, which are positioned in the second row."
+        }
+    ]
+}
