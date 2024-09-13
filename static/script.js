@@ -129,4 +129,12 @@ function scorecard()
     }
 
     scorecardElement.style.display = "block";
+
+    if (scorePercentage >= 50) confetti();
+}
+
+function confetti()
+{
+    confettiCreator = new JSConfetti();
+    confettiCreator.addConfetti();
 }
