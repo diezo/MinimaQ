@@ -4,8 +4,8 @@ from base64 import b64encode, b64decode
 import binascii
 import json
 
-API_KEY: str = ""
-DEBUG: bool = True
+API_KEY: str = "AIzaSyCzJkLHR69v8Q4w8z1DZKBIFdHO3m_CSeQ"
+DEBUG: bool = False
 
 # Configuration
 genai.configure(api_key=API_KEY)
