@@ -11,4 +11,4 @@ Here are the word limits:
 - Question - 20 words
 - Explaination - 70 words
 
-Make sure to double check that the "correct" key must have the index of the correct option only.
+Please do not include any special characters even in mathematics as my website can only display plain text.
