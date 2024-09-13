@@ -16,18 +16,20 @@
 
         <input type="text" id="topic-input" class="textbox" placeholder="Topic">
         
-        <select class="selectbox" id="difficulty-input">
-            <option value="easy" selected>Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-        </select>
-
-        <select class="selectbox" id="questions-count-input">
-            <option value="1">1 question</option>
-            <option value="3">3 questions</option>
-            <option value="5" selected>5 questions</option>
-            <option value="10">10 questions</option>
-        </select>
+        <div id="select-container">
+            <select class="selectbox" id="difficulty-input">
+                <option value="easy" selected>Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+    
+            <select class="selectbox" id="questions-count-input">
+                <option value="1">1 question</option>
+                <option value="3">3 questions</option>
+                <option value="5" selected>5 questions</option>
+                <option value="10">10 questions</option>
+            </select>
+        </div>
         
         <button id="generate-button" onclick="generate()">GENERATE</button>
     </div>
