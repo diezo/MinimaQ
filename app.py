@@ -18,6 +18,10 @@ model = genai.GenerativeModel("gemini-pro", generation_config=generation_config)
 app: Flask = Flask(__name__)
 
 # Define Endpoints
+@app.get("/ping")
+def ping():
+    return Response("Pong!", 200, content_type="text/plain")
+
 @app.get("/")
 def home():
     with open("./home.html", "r", encoding="utf-8") as file:
