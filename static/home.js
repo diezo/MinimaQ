@@ -22,6 +22,7 @@ function generate()
         startTimer();
         window.location = `/quiz?topic=${btoa(topic)}&difficulty=${difficulty}&count=${questionsCount}`;
     }
+    else showTopicError();
 }
 
 function modifyDigits(number, i)
@@ -75,3 +76,25 @@ function finishTimer()
 document.addEventListener("visibilitychange", () =>{
     if (!document.hidden) finishTimer();
 })
+
+function showTopicError()
+{
+    // Clear Previous Animations
+    topicElement.classList.remove("textbox-error-blinking");
+
+    setTimeout(() =>
+    {
+        // New Animation
+        topicElement.classList.add("textbox-error-blinking");
+
+        setTimeout(() =>
+        {
+            topicElement.classList.remove("textbox-error-blinking");
+            
+            setTimeout(() =>
+            {
+                topicElement.classList.add("textbox-error-blinking");
+            }, 10);
+        }, 200);
+    }, 10);
+}
